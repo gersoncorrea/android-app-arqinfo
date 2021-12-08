@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ArqInfo.iml" filepath="$PROJECT_DIR$/.idea/modules/ArqInfo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ArqInfo.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ArqInfo.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/ArqInfo.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/ArqInfo.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/ArqInfo.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/ArqInfo.core.iml" />
+    </modules>
+  </component>
+</project>
