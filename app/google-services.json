@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "923178469259",
+    "project_id": "gerson-analytics",
+    "storage_bucket": "gerson-analytics.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923178469259:android:d90aca73a578c02b14518e",
+        "android_client_info": {
+          "package_name": "com.app.arqinfo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923178469259-920asflgpkep438dsc3emfbsicm2p05d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf2eVDQx9QiCtqdnlWIAYtqNW7womy3lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923178469259-920asflgpkep438dsc3emfbsicm2p05d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
