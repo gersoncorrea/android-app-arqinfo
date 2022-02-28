@@ -9,3 +9,6 @@ rootProject.name = "ArqInfo"
 include ':app'
 include ':core'
 include ':common'
+include ':feature-authentication'
+include ':feature-home'
+include ':feature-profile'
