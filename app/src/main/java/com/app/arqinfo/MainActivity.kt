@@ -1,11 +1,13 @@
 package com.app.arqinfo
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.app.core.actions.FeatureActions
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        startActivity(Intent(FeatureActions.AUTH_ACTION))
     }
 }
