@@ -51,11 +51,11 @@
         android:layout_marginTop="69dp"
         android:layout_marginEnd="16dp"
         android:hint="Password"
-        app:passwordToggleEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userEmailInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/userEmailInputLayout"
+        app:passwordToggleEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTextUserPassword"
@@ -74,13 +74,13 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="51dp"
         android:text="Entrar"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/signUpTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/forgotPasswordTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -88,8 +88,8 @@
         app:layout_constraintEnd_toEndOf="@+id/userPasswordInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/userPasswordInputLayout" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/signUpTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
