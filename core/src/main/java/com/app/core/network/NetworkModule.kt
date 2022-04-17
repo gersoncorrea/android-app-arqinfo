@@ -36,7 +36,7 @@ object NetworkModule {
     private fun createConnection(
         client: OkHttpClient,
     ) = Retrofit.Builder()
-        .baseUrl("http://192.168.0.5:3000/")
+        .baseUrl("http://192.168.0.8:3000/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()

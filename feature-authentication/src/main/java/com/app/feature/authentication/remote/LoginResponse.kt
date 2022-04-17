@@ -10,7 +10,8 @@ data class LoginResponse(
 
 data class LoginHeader(
     @SerializedName("img") val img: String,
-    @SerializedName("labels") val labels: List<LabelsDefault>
+    @SerializedName("labelUserInput") val labelUserInput: LabelsDefault,
+    @SerializedName("labelPasswordInput") val labelPasswordInput: LabelsDefault
 )
 
 data class LabelsDefault(

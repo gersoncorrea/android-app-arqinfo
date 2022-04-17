@@ -16,16 +16,13 @@ import com.app.feature.authentication.remote.LoginHeader
 import org.koin.android.ext.android.inject
 import org.koin.androidx.fragment.android.replace
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class LoginFragment : Fragment(), LoginContract.View {
 
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var progressView: ViewGroup
     private val featureRouter: FeatureRouter by inject()
-    private val viewModel by viewModel<LoginViewModel> {
-        parametersOf(this)
-    }
-
+    private val viewModel by viewModel<LoginViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,12 +35,19 @@ class LoginFragment : Fragment(), LoginContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        progressView = layoutInflater.inflate(
+            com.app.common.R.layout.progressbar_layout,
+            null
+        ) as ViewGroup
+
         binding.button.setOnClickListener {
             featureRouter.start(requireActivity(), HOME_ACTION)
         }
 
         binding.forgotPasswordTextView.setOnClickListener {
             activity?.supportFragmentManager?.commit {
+                setReorderingAllowed(true)
                 replace<ForgotPasswordFragment>(R.id.frame_view)
                 addToBackStack(null)
             }
@@ -60,7 +64,21 @@ class LoginFragment : Fragment(), LoginContract.View {
     }
 
     private fun observeLoginResponse() {
+
+        viewModel.loading.observe(viewLifecycleOwner) {
+            if (it) {
+                val v = binding.fragmentLogin.rootView
+                val viewGroup = (v as ViewGroup)
+                viewGroup.addView(progressView)
+            } else {
+                val v = binding.fragmentLogin.rootView
+                val viewGroup = (v as ViewGroup)
+                viewGroup.removeView(progressView)
+            }
+        }
+
         viewModel.login.observe(viewLifecycleOwner) {
+            bindHeader(it.header)
             bindForgotPassword(it.forgotPassword)
             bindBottom(it.bottom)
         }
@@ -72,6 +90,8 @@ class LoginFragment : Fragment(), LoginContract.View {
     }
 
     override fun bindHeader(header: LoginHeader) {
+        binding.userEmailInputLayout.hint = header.labelUserInput.title
+        binding.userPasswordInputLayout.hint = header.labelPasswordInput.title
     }
 
     override fun bindBottom(loginBottom: LoginBottom) {

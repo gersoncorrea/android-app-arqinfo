@@ -12,7 +12,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val view: LoginContract.View,
     private val repository: LoginRepository
 ) : ViewModel() {
     private val viewModelJob = SupervisorJob()
@@ -24,15 +23,21 @@ class LoginViewModel(
     private val _error: MutableLiveData<Throwable> = MutableLiveData()
     val error: LiveData<Throwable> get() = _error
 
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData(false)
+    val loading: LiveData<Boolean> get() = _loading
+
     fun getAll() {
+        _loading.value = true
         viewModelScope.launch {
             when (val apiResponse = repository.getLogin()) {
                 is ApiResult.Success -> {
                     apiResponse.data.let {
+                        _loading.value = false
                         _login.value = it
                     }
                 }
                 is ApiResult.Error -> {
+                    _loading.value = false
                     _error.value = apiResponse.exception
                 }
             }

@@ -1,7 +1,6 @@
 package com.app.feature.authentication.remote
 
 import com.app.feature.authentication.domain.LoginRepository
-import com.app.feature.authentication.login.LoginContract
 import com.app.feature.authentication.login.LoginViewModel
 import com.app.feature.authentication.repository.LoginDataRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -21,6 +20,6 @@ object FeatAuthModule {
     }
 
     val uiModule = module {
-        viewModel { (view: LoginContract.View) -> LoginViewModel(view = view, repository = get()) }
+        viewModel { LoginViewModel(repository = get()) }
     }
 }
