@@ -1,19 +1,46 @@
 package com.app.core.network
 
+import com.app.core.BuildConfig
 import com.app.core.provider.NetworkConfigProvider
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
-interface NetworkModule {
+object NetworkModule {
+
+    val instance = module {
+        single { provideOkHttpClient() }
+        single<Retrofit> { createConnection(get()) }
+    }
+
+    private const val CONNECTION_TIMEOUT = 10000L
+
+    private fun provideOkHttpClient(): OkHttpClient {
+        val client = OkHttpClient.Builder()
+            .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS)
+            .readTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS)
+            .writeTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS)
+
+        if (BuildConfig.DEBUG) {
+            val logging = HttpLoggingInterceptor()
+            logging.level = HttpLoggingInterceptor.Level.BODY
+            client.addInterceptor(logging)
+        }
+
+        return client.build()
+    }
+
     private fun createConnection(
         client: OkHttpClient,
-        networkConfigProvider: NetworkConfigProvider
     ) = Retrofit.Builder()
-        .baseUrl(networkConfigProvider.getBaseUrl())
+        .baseUrl("http://192.168.0.5:3000/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
 
-    private fun createClient() = OkHttpClient.Builder()
+
+    internal inline fun <reified T> createApi(retrofit: Retrofit) = retrofit.create(T::class.java)
 }

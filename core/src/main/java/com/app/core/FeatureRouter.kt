@@ -19,7 +19,7 @@ internal class StandardFeatureRouter : FeatureRouter {
         }
     }
 
-    private fun createIntent(context: Context, action: String): Intent? {
+    private fun createIntent(context: Context, action: String): Intent {
         return Intent(action).setPackage(context.packageName)
     }
 }

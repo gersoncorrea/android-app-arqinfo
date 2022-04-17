@@ -50,11 +50,19 @@ dependencies {
 
     //Retrofit + Ok Http
     def retrofit_version = "2.9.0"
-    def okhttp_version = '5.0.0-alpha.5'
-    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    def okhttp_version = "4.9.3"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.okhttp3:okhttp:$okhttp_version"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+    // Coroutines
+    def coroutine_core_version = '1.4.1'
+    def coroutine_android_version = '1.5.2'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_core_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_android_version"
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
