@@ -1,6 +1,7 @@
 package com.app.feature.authentication.remote
 
 import com.app.feature.authentication.domain.LoginRepository
+import com.app.feature.authentication.forgotpassword.ForgotPasswordViewModel
 import com.app.feature.authentication.login.LoginViewModel
 import com.app.feature.authentication.repository.LoginDataRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -21,5 +22,6 @@ object FeatAuthModule {
 
     val uiModule = module {
         viewModel { LoginViewModel(repository = get()) }
+        viewModel { ForgotPasswordViewModel(repository = get()) }
     }
 }

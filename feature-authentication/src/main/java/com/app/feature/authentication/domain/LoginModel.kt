@@ -8,12 +8,8 @@ data class LoginModel(
 
 data class LoginHeader(
     val img: String,
-    val labels: List<LabelsDefault>
-)
-
-data class LabelsDefault(
-    val title: String,
-    val type: String
+    val labelUserInput: LabelsDefault,
+    val labelPasswordInput: LabelsDefault
 )
 
 data class LoginBottom(

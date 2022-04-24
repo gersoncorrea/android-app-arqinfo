@@ -1,7 +1,7 @@
 package com.app.feature.authentication.login
 
-import com.app.feature.authentication.remote.LoginBottom
-import com.app.feature.authentication.remote.LoginHeader
+import com.app.feature.authentication.domain.LoginBottom
+import com.app.feature.authentication.domain.LoginHeader
 
 interface LoginContract {
     interface View {

@@ -10,9 +10,9 @@ import com.app.core.FeatureRouter
 import com.app.core.actions.FeatureActions.HOME_ACTION
 import com.app.feature.authentication.R
 import com.app.feature.authentication.databinding.FragmentLoginBinding
+import com.app.feature.authentication.domain.LoginBottom
+import com.app.feature.authentication.domain.LoginHeader
 import com.app.feature.authentication.forgotpassword.ForgotPasswordFragment
-import com.app.feature.authentication.remote.LoginBottom
-import com.app.feature.authentication.remote.LoginHeader
 import org.koin.android.ext.android.inject
 import org.koin.androidx.fragment.android.replace
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,7 +36,8 @@ class LoginFragment : Fragment(), LoginContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        progressView = layoutInflater.inflate(
+        progressView = View.inflate(
+            activity,
             com.app.common.R.layout.progressbar_layout,
             null
         ) as ViewGroup
