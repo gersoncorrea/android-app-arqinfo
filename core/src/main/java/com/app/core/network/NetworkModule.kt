@@ -1,7 +1,6 @@
 package com.app.core.network
 
 import com.app.core.BuildConfig
-import com.app.core.provider.NetworkConfigProvider
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -36,7 +35,7 @@ object NetworkModule {
     private fun createConnection(
         client: OkHttpClient,
     ) = Retrofit.Builder()
-        .baseUrl("http://192.168.0.8:3000/")
+        .baseUrl("http://192.168.0.9:3000/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()

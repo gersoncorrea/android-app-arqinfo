@@ -13,4 +13,6 @@ class LoginDataRepository(
 
     override suspend fun getForgotPassword() =
         NetworkCall.safeApiCall { api.getForgotPasswordAsync().toModel() }
+
+    override suspend fun getSignUp() = NetworkCall.safeApiCall { api.getSignUpAsync().toModel() }
 }

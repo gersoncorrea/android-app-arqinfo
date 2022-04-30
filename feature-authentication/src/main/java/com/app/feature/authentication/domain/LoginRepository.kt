@@ -7,4 +7,6 @@ interface LoginRepository {
     suspend fun getLogin(): ApiResult<LoginModel>
 
     suspend fun getForgotPassword(): ApiResult<ForgotPasswordModel>
+
+    suspend fun getSignUp(): ApiResult<SignUpModel>
 }

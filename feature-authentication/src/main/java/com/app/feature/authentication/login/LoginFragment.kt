@@ -13,6 +13,7 @@ import com.app.feature.authentication.databinding.FragmentLoginBinding
 import com.app.feature.authentication.domain.LoginBottom
 import com.app.feature.authentication.domain.LoginHeader
 import com.app.feature.authentication.forgotpassword.ForgotPasswordFragment
+import com.app.feature.authentication.signup.SignUpFragment
 import org.koin.android.ext.android.inject
 import org.koin.androidx.fragment.android.replace
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,6 +51,14 @@ class LoginFragment : Fragment(), LoginContract.View {
             activity?.supportFragmentManager?.commit {
                 setReorderingAllowed(true)
                 replace<ForgotPasswordFragment>(R.id.frame_view)
+                addToBackStack(null)
+            }
+        }
+
+        binding.signUpTextView.setOnClickListener {
+            activity?.supportFragmentManager?.commit {
+                setReorderingAllowed(true)
+                replace<SignUpFragment>(R.id.frame_view)
                 addToBackStack(null)
             }
         }

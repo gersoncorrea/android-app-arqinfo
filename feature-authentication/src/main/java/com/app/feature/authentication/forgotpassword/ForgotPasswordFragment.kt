@@ -15,7 +15,6 @@ class ForgotPasswordFragment : Fragment() {
 
     private lateinit var binding: FragmentForgotPasswordBinding
     private lateinit var progressView: ViewGroup
-    private val featureRouter: FeatureRouter by inject()
     private val viewModel by viewModel<ForgotPasswordViewModel>()
 
     override fun onCreateView(
