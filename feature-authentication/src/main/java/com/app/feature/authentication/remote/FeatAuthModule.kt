@@ -4,6 +4,7 @@ import com.app.feature.authentication.domain.LoginRepository
 import com.app.feature.authentication.forgotpassword.ForgotPasswordViewModel
 import com.app.feature.authentication.login.LoginViewModel
 import com.app.feature.authentication.repository.LoginDataRepository
+import com.app.feature.authentication.signup.SignUpViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -23,5 +24,6 @@ object FeatAuthModule {
     val uiModule = module {
         viewModel { LoginViewModel(repository = get()) }
         viewModel { ForgotPasswordViewModel(repository = get()) }
+        viewModel { SignUpViewModel(repository = get()) }
     }
 }
