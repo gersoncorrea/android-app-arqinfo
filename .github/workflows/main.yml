@@ -1,7 +1,9 @@
-name: Android CI/CD:
+name: Android CI/CD
+on:
   push:
     branches:
-      - 'master'jobs:
+      - 'master'
+jobs:
   test:
     name: Run KtLint
     runs-on: android
