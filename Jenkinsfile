@@ -7,7 +7,7 @@ pipeline{
     stage('Lint & Unit Test'){
       parallel {
 
-        stage('ktlint'){
+        stage('ktlint-script'){
           steps {
             sh '.\gradlew ktlintCheck'
           }
