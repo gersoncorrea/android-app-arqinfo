@@ -9,13 +9,13 @@ pipeline{
 
         stage('ktlint'){
           steps {
-            sh './gradlew ktlintCheck'
+            sh 'sh ./gradlew ktlintCheck'
           }
         }
 
         stage('Unit Test'){
           steps{
-            sh './gradlew testDebugUnitTest'
+            sh 'sh ./gradlew testDebugUnitTest'
           }
         }
         
