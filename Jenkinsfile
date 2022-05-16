@@ -4,6 +4,15 @@ pipeline{
   }
 
   stages{
+
+  stage('Check labels'){
+  steps{
+    pullRequests.labels.each{
+        echo "label: $it"
+    }
+  }
+  }
+
     stage('Test'){
       parallel {
 
