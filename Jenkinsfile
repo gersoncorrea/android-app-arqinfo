@@ -7,7 +7,7 @@ pipeline{
 
   stage('Check labels'){
   steps{
-    pullRequests.labels.each{
+    pullRequest.labels.each{
         echo "label: $it"
     }
   }
