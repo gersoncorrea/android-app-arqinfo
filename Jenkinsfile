@@ -6,11 +6,9 @@ pipeline{
   stages{
 
   stage('Check labels'){
-  steps{
-    pullRequest.labels.each{
-        echo "label: $it"
-    }
-  }
+        pullRequest.labels.each{
+            echo "label: $it"
+        }
   }
 
     stage('Test'){
