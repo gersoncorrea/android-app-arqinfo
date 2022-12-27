@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.app.core.FeatureRouter
 import com.app.feature.authentication.R
 import com.app.feature.authentication.databinding.FragmentForgotPasswordBinding
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForgotPasswordFragment : Fragment() {
@@ -30,7 +28,8 @@ class ForgotPasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         progressView = View.inflate(
             activity,
-            R.layout.progressbar_layout, null
+            R.layout.progressbar_layout,
+            null
         ) as ViewGroup
 
         setListener()
@@ -43,7 +42,6 @@ class ForgotPasswordFragment : Fragment() {
     }
 
     private fun observeScreenResponse() {
-
         viewModel.loading.observe(viewLifecycleOwner) {
             if (it) {
                 val v = binding.fragmentForgot.rootView
@@ -57,8 +55,10 @@ class ForgotPasswordFragment : Fragment() {
         }
 
         viewModel.screenResponse.observe(viewLifecycleOwner) {
-            binding.userEmailInputLayout.hint = it.label.title
-            binding.button.text = it.button
+            with(binding) {
+                userEmailInputLayout.hint = it.label.title
+                button.text = it.button
+            }
         }
 
         viewModel.error.observe(viewLifecycleOwner) {
@@ -66,7 +66,7 @@ class ForgotPasswordFragment : Fragment() {
         }
     }
 
-    private fun setListener() {
-        binding.button.setOnClickListener { activity?.supportFragmentManager?.popBackStack() }
+    private fun setListener() = with(binding) {
+        button.setOnClickListener { activity?.supportFragmentManager?.popBackStack() }
     }
 }
