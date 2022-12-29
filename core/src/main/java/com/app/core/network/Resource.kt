@@ -1,10 +1,10 @@
 package com.app.core.network
 
 class Resource<T>(
-      val mStatus: Status,
-      val mData: T? = null,
-      val mMessage: String?,
-      val mError: Throwable? = null
+    val mStatus: Status,
+    val mData: T? = null,
+    val mMessage: String?,
+    val mError: Throwable? = null
 ) {
 
     enum class Status {

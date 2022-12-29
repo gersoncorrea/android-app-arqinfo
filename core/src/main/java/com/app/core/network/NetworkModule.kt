@@ -33,13 +33,12 @@ object NetworkModule {
     }
 
     private fun createConnection(
-        client: OkHttpClient,
+        client: OkHttpClient
     ) = Retrofit.Builder()
-        .baseUrl("http://192.168.0.9:3000/")
+        .baseUrl("http://10.0.2.2:3000/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
-
 
     internal inline fun <reified T> createApi(retrofit: Retrofit) = retrofit.create(T::class.java)
 }
