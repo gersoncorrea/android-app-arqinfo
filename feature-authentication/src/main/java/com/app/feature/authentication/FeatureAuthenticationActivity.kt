@@ -6,9 +6,7 @@ import androidx.fragment.app.commit
 import com.app.core.RouterModule
 import com.app.feature.authentication.login.LoginFragment
 import com.app.feature.authentication.remote.FeatAuthModule
-import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
-import org.koin.core.context.startKoin
 
 class FeatureAuthenticationActivity : AppCompatActivity(R.layout.feature_auth_activity) {
     private val appModules by lazy {
@@ -22,7 +20,9 @@ class FeatureAuthenticationActivity : AppCompatActivity(R.layout.feature_auth_ac
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadKoinModules( appModules )
+        loadKoinModules(appModules)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.title = "Autenticação"
         savedInstanceState?.isEmpty.apply {
             supportFragmentManager.commit {
                 setReorderingAllowed(true)

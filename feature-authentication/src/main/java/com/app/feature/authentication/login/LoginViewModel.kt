@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.app.core.network.ApiResult
 import com.app.feature.authentication.domain.LoginModel
 import com.app.feature.authentication.domain.LoginRepository
-import com.app.feature.authentication.remote.LoginResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.SupervisorJob

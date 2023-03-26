@@ -33,7 +33,6 @@ class LoginFragment : Fragment(), LoginContract.View {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,7 +42,7 @@ class LoginFragment : Fragment(), LoginContract.View {
             null
         ) as ViewGroup
 
-        binding.button.setOnClickListener {
+        binding.button.onButtonClickListener {
             featureRouter.start(requireActivity(), HOME_ACTION)
         }
 
@@ -74,7 +73,6 @@ class LoginFragment : Fragment(), LoginContract.View {
     }
 
     private fun observeLoginResponse() {
-
         viewModel.loading.observe(viewLifecycleOwner) {
             if (it) {
                 val v = binding.fragmentLogin.rootView
@@ -105,7 +103,7 @@ class LoginFragment : Fragment(), LoginContract.View {
     }
 
     override fun bindBottom(loginBottom: LoginBottom) {
-        binding.button.text = loginBottom.button
+        binding.button.setButtonText(loginBottom.button)
         binding.signUpTextView.text = loginBottom.signup
     }
 

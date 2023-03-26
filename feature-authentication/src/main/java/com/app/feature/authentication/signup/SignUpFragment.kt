@@ -86,10 +86,10 @@ class SignUpFragment : Fragment() {
         val inputLayout = rowView.findViewById<TextInputLayout>(R.id.fieldInputLayout)
         rowView.id = View.generateViewId()
         inputLayout.hint = it.title
-        if (it.type == TEXT_TYPE) {
+        if (it.type == FIELD_TYPES.TEXT_TYPE) {
             rowField.inputType = InputType.TYPE_CLASS_TEXT
         }
-        if (it.type == PASSWORD_TYPE) {
+        if (it.type == FIELD_TYPES.PASSWORD_TYPE) {
             rowField.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         }
         val lp = ConstraintLayout.LayoutParams(
@@ -127,7 +127,7 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    companion object {
+    object FIELD_TYPES {
         const val TEXT_TYPE = "TEXT"
         const val PASSWORD_TYPE = "PASSWORD"
     }

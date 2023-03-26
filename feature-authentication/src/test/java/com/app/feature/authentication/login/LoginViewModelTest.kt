@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.app.core.network.ApiResult
 import com.app.feature.authentication.domain.LoginModel
 import com.app.feature.authentication.login.TestObjects.loginObject
-import com.app.feature.authentication.remote.AuthApi
 import com.app.feature.authentication.repository.LoginDataRepository
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -19,7 +18,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class LoginViewModelTest {
@@ -49,7 +47,6 @@ class LoginViewModelTest {
 
     @Test
     fun `get login screen payload`() {
-
         coEvery { repository.getLogin() } returns ApiResult.Success(loginModel)
 
         val response = runBlocking { repository.getLogin() }
