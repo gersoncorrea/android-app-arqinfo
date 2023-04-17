@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import com.app.core.FeatureRouter
 import com.app.core.actions.FeatureActions.AUTH_ACTION
+import com.app.feature.authentication.FeatureAuthenticationActivity
 import com.app.feature.authentication.R
 import com.app.feature.authentication.databinding.FragmentSignupBinding
 import com.app.feature.authentication.domain.LabelsDefault
@@ -20,7 +21,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpFragment : Fragment() {
 
-    private lateinit var binding: FragmentSignupBinding
+    private val binding: FragmentSignupBinding by lazy {
+        FragmentSignupBinding.inflate(layoutInflater)
+    }
     private lateinit var progressView: ViewGroup
     private val featureRouter: FeatureRouter by inject()
     private var lastId = -1
@@ -29,9 +32,11 @@ class SignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentSignupBinding.inflate(layoutInflater, container, false)
+        (activity as FeatureAuthenticationActivity).supportActionBar?.title = "Cadastrar"
+        (activity as FeatureAuthenticationActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as FeatureAuthenticationActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
         return binding.root
     }
 
@@ -40,7 +45,7 @@ class SignUpFragment : Fragment() {
         progressView = View.inflate(
             activity,
             R.layout.progressbar_layout,
-            null
+            null,
         ) as ViewGroup
 
         bindListener()
@@ -94,7 +99,7 @@ class SignUpFragment : Fragment() {
         }
         val lp = ConstraintLayout.LayoutParams(
             ConstraintLayout.LayoutParams.MATCH_PARENT,
-            ConstraintLayout.LayoutParams.WRAP_CONTENT
+            ConstraintLayout.LayoutParams.WRAP_CONTENT,
         )
         layoutFragmentSignUp.addView(rowView, lp)
 
@@ -106,7 +111,7 @@ class SignUpFragment : Fragment() {
                 ConstraintSet.TOP,
                 imageView.id,
                 ConstraintSet.BOTTOM,
-                10
+                10,
             )
         } else {
             cSet.connect(
@@ -114,7 +119,7 @@ class SignUpFragment : Fragment() {
                 ConstraintSet.TOP,
                 lastId,
                 ConstraintSet.BOTTOM,
-                10
+                10,
             )
         }
         lastId = rowView.id

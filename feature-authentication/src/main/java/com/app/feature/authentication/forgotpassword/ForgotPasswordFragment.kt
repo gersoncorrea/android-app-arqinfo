@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.app.feature.authentication.FeatureAuthenticationActivity
 import com.app.feature.authentication.R
 import com.app.feature.authentication.databinding.FragmentForgotPasswordBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,6 +21,10 @@ class ForgotPasswordFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity as FeatureAuthenticationActivity).supportActionBar?.title = "Recuperar Senha"
+        (activity as FeatureAuthenticationActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as FeatureAuthenticationActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
+
         binding = FragmentForgotPasswordBinding.inflate(inflater, container, false)
         return binding.root
     }

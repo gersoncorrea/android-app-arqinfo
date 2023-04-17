@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import com.app.core.FeatureRouter
 import com.app.core.actions.FeatureActions.HOME_ACTION
+import com.app.feature.authentication.FeatureAuthenticationActivity
 import com.app.feature.authentication.R
 import com.app.feature.authentication.databinding.FragmentLoginBinding
 import com.app.feature.authentication.domain.LoginBottom
@@ -24,11 +26,21 @@ class LoginFragment : Fragment(), LoginContract.View {
     private lateinit var progressView: ViewGroup
     private val featureRouter: FeatureRouter by inject()
     private val viewModel by viewModel<LoginViewModel>()
+
+    private val onBackStackListener = FragmentManager.OnBackStackChangedListener {
+        Unit
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
+        (activity as FeatureAuthenticationActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(false)
+            setDisplayShowTitleEnabled(false)
+        }
+
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -39,7 +51,7 @@ class LoginFragment : Fragment(), LoginContract.View {
         progressView = View.inflate(
             activity,
             com.app.common.R.layout.progressbar_layout,
-            null
+            null,
         ) as ViewGroup
 
         binding.button.onButtonClickListener {

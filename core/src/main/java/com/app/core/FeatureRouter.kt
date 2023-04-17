@@ -13,10 +13,12 @@ interface FeatureRouter {
 
 internal class StandardFeatureRouter : FeatureRouter {
     override fun start(receiver: Activity, action: String) {
-        receiver.run {
-            startActivity(createIntent(receiver, action))
-            finish()
-        }
+        receiver.startActivity(createIntent(receiver,action))
+        receiver.finish()
+//        receiver.run {
+//            startActivity(createIntent(receiver, action))
+//            finish()
+//        }
     }
 
     private fun createIntent(context: Context, action: String): Intent {
