@@ -7,23 +7,18 @@ import com.app.feature.authentication.login.TestObjects.loginObject
 import com.app.feature.authentication.repository.LoginDataRepository
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.newSingleThreadContext
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.MockitoAnnotations
-
+@ExperimentalCoroutinesApi
 class LoginViewModelTest {
-    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
     private lateinit var repository: LoginDataRepository
-    lateinit var viewModel: LoginViewModel
+    private val testScheduler = StandardTestDispatcher()
     private val loginModel: LoginModel = loginObject
 
     @get:Rule
@@ -33,16 +28,16 @@ class LoginViewModelTest {
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
-        Dispatchers.setMain(mainThreadSurrogate)
         repository = mockk(relaxed = true)
-        viewModel = mockk(relaxed = true)
+
+        Dispatchers.setMain(testScheduler)
+
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-        mainThreadSurrogate.close()
     }
 
     @Test
@@ -53,4 +48,74 @@ class LoginViewModelTest {
 
         assertEquals(ApiResult.Success(loginModel), response)
     }
+
+    @Test
+    fun `loading LiveData should be true before getAll() completes`() = runTest{
+        // Given
+        coEvery { repository.getLogin() } returns ApiResult.Success(loginModel)
+        val viewModel = LoginViewModel(repository)
+
+        // When
+        viewModel.getAll()
+
+        // Then
+        assertEquals(true, viewModel.loading.value)
+    }
+
+    @Test
+    fun `getAll() should update login LiveData when repository returns success`() = runTest {
+        // Given
+        coEvery { repository.getLogin() } returns ApiResult.Success(loginModel)
+        val viewModel = LoginViewModel(repository)
+
+        // When
+        viewModel.getAll()
+
+        // Then
+        advanceUntilIdle()
+        assertEquals(loginModel, viewModel.login.value)
+    }
+
+    @Test
+    fun `getAll() should update error LiveData when repository returns error`() = runTest {
+        // Given
+        coEvery { repository.getLogin() } returns ApiResult.Error(Exception())
+        val viewModel = LoginViewModel(repository)
+
+        // When
+        viewModel.getAll()
+
+        // Then
+        advanceUntilIdle()
+        assert(viewModel.error.value is Exception)
+    }
+
+    @Test
+    fun `getAll() should update loading LiveData when repository returns error`() = runTest{
+        // Given
+        coEvery { repository.getLogin() } returns ApiResult.Error(Exception())
+        val viewModel = LoginViewModel(repository)
+
+        // When
+        viewModel.getAll()
+
+        // Then
+        advanceUntilIdle()
+        assertEquals(false, viewModel.loading.value)
+    }
+
+    @Test
+    fun `getAll() should update loading LiveData when repository returns success`() = runTest{
+        // Given
+        coEvery { repository.getLogin() } returns ApiResult.Success(loginModel)
+        val viewModel = LoginViewModel(repository)
+
+        // When
+        viewModel.getAll()
+
+        // Then
+        advanceUntilIdle()
+        assertEquals(false, viewModel.loading.value)
+    }
+
 }
