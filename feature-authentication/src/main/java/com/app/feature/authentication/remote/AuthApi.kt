@@ -7,7 +7,7 @@ interface AuthApi {
     companion object {
         private const val BASE = "/arqinfo"
         const val LOGIN = "$BASE/login"
-        const val FORGOT_PASSWORD = "$BASE/forgotPassword"
+        const val FORGOT_PASSWORD = "$BASE/recover"
         const val SIGNUP = "$BASE/signup"
     }
 
