@@ -12,7 +12,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 class ForgotPasswordViewModel(
-    private val repository: LoginRepository
+    private val repository: LoginRepository,
 ) : ViewModel() {
     private val viewModelJob = SupervisorJob()
     private val viewModelScope = CoroutineScope(Main + viewModelJob)
@@ -23,10 +23,8 @@ class ForgotPasswordViewModel(
     private val _error: MutableLiveData<Throwable> = MutableLiveData()
     val error: LiveData<Throwable> = _error
 
-
     private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loading
-
 
     fun getScreenPayload() {
         _loading.value = true

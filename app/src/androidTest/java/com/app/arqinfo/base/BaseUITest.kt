@@ -1,4 +1,4 @@
-package com.app.arqinfo
+package com.app.arqinfo.base
 
 import androidx.test.platform.app.InstrumentationRegistry
 import okhttp3.mockwebserver.Dispatcher
@@ -23,10 +23,6 @@ open class BaseUITest : KoinTest {
         mockWebServer.shutdown()
     }
 
-    fun mockResponse(fileName: String) = mockWebServer.enqueue(
-        MockResponse().setResponseCode(200).setBody(getJson(fileName))
-    )
-
     fun mockResponseTest(fileName: String, endpoint: String) {
         mockWebServer.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
@@ -35,7 +31,6 @@ open class BaseUITest : KoinTest {
                     else -> MockResponse().setResponseCode(400)
                 }
             }
-
         }
     }
 
