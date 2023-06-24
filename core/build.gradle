@@ -20,6 +20,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug{
+            buildConfigField "String", "BASE_URL", "\"http://10.0.2.2:3000/\""
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -27,6 +30,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
