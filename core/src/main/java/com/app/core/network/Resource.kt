@@ -8,7 +8,7 @@ class Resource<T>(
 ) {
 
     enum class Status {
-        SUCCESS, ERROR, LOADING, VALIDATION
+        SUCCESS, ERROR, LOADING
     }
 
     companion object {
@@ -20,12 +20,10 @@ class Resource<T>(
             return Resource(Status.ERROR, null, null, error)
         }
 
-        fun <T> loading(data: T): Resource<T> {
+        fun <T> loading(data: T?): Resource<T> {
             return Resource(Status.LOADING, data, null)
         }
 
-        fun <T> validation(data: T): Resource<T> {
-            return Resource(Status.VALIDATION, data, null, null)
-        }
+
     }
 }

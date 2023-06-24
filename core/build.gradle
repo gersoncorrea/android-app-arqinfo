@@ -68,7 +68,9 @@ dependencies {
     def coroutine_android_version = '1.5.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_core_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_android_version"
-
+    api "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+    api "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

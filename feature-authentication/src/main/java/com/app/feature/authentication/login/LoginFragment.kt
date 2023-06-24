@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
+import androidx.lifecycle.Observer
 import com.app.core.FeatureRouter
 import com.app.core.actions.FeatureActions.HOME_ACTION
+import com.app.core.network.Resource
 import com.app.feature.authentication.FeatureAuthenticationActivity
 import com.app.feature.authentication.R
 import com.app.feature.authentication.databinding.FragmentLoginBinding
 import com.app.feature.authentication.domain.LoginBottom
 import com.app.feature.authentication.domain.LoginHeader
+import com.app.feature.authentication.domain.LoginModel
 import com.app.feature.authentication.forgotpassword.ForgotPasswordFragment
 import com.app.feature.authentication.signup.SignUpFragment
 import org.koin.android.ext.android.inject
@@ -85,23 +88,64 @@ class LoginFragment : Fragment(), LoginContract.View {
     }
 
     private fun observeLoginResponse() {
-        viewModel.loading.observe(viewLifecycleOwner) {
-            if (it) {
-                val v = binding.fragmentLogin.rootView
-                val viewGroup = (v as ViewGroup)
-                viewGroup.addView(progressView)
-            } else {
-                val v = binding.fragmentLogin.rootView
-                val viewGroup = (v as ViewGroup)
-                viewGroup.removeView(progressView)
+//        Observer<Resource<LoginModel>> {
+//            when (it.mStatus) {
+//                Resource.Status.SUCCESS -> {}
+//                Resource.Status.ERROR -> {}
+//                Resource.Status.LOADING -> {}
+//            }
+//        }
+
+        viewModel.teste.observe(viewLifecycleOwner) {
+            when (it.mStatus) {
+                Resource.Status.LOADING -> {
+                    showLoading()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    hideLoading()
+                    it.mData?.let { data ->
+                        bindHeader(data.header)
+                        bindForgotPassword(data.forgotPassword)
+                        bindBottom(data.bottom)
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    hideLoading()
+                }
             }
         }
 
-        viewModel.login.observe(viewLifecycleOwner) {
-            bindHeader(it.header)
-            bindForgotPassword(it.forgotPassword)
-            bindBottom(it.bottom)
-        }
+//        viewModel.loading.observe(viewLifecycleOwner) {
+//            if (it) {
+//                val v = binding.fragmentLogin.rootView
+//                val viewGroup = (v as ViewGroup)
+//                viewGroup.addView(progressView)
+//            } else {
+//                val v = binding.fragmentLogin.rootView
+//                val viewGroup = (v as ViewGroup)
+//                viewGroup.removeView(progressView)
+//            }
+//        }
+//
+//        viewModel.login.observe(viewLifecycleOwner) {
+//            bindHeader(it.header)
+//            bindForgotPassword(it.forgotPassword)
+//            bindBottom(it.bottom)
+//        }
+    }
+
+    private fun showLoading() {
+        val v = binding.fragmentLogin.rootView
+        val viewGroup = (v as ViewGroup)
+        viewGroup.addView(progressView)
+    }
+
+    private fun hideLoading() {
+        val v = binding.fragmentLogin.rootView
+        val viewGroup = (v as ViewGroup)
+        viewGroup.removeView(progressView)
     }
 
     override fun onResume() {
