@@ -30,6 +30,9 @@ class ForgotPasswordViewModel(
         _loading.value = true
         viewModelScope.launch {
             when (val apiResponse = repository.getForgotPassword()) {
+
+                is ApiResult.Loading->{}
+
                 is ApiResult.Success -> {
                     apiResponse.data.let {
                         _loading.value = false

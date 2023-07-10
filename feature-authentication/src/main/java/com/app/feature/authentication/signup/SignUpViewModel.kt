@@ -31,6 +31,9 @@ class SignUpViewModel(
         _loading.value = true
         viewModelScope.launch {
             when (val apiResponse = repository.getSignUp()) {
+
+                is ApiResult.Loading->{}
+
                 is ApiResult.Success -> {
                     apiResponse.data.let {
                         _loading.value = false
